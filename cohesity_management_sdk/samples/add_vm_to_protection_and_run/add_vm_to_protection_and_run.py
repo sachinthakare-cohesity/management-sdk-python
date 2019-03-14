@@ -12,7 +12,8 @@ import os
 import argparse
 
 from cohesity_management_sdk.cohesity_client import CohesityClient
-from cohesity_management_sdk.samples.on_demand_job_run.on_demand_job_run import ProtectionJobs
+from cohesity_management_sdk.samples.on_demand_job_run.on_demand_job_run \
+    import ProtectionJobs
 
 
 class AddVMProtectionJob(object):
@@ -39,8 +40,10 @@ class AddVMProtectionJob(object):
 
         # Add the vms to the protection job.
         resp.source_ids = vm_id_list + resp.source_ids
-        update_resp = self.cohesity_client.protection_jobs.update_protection_job(body=resp, id=resp.id)
-        assert update_resp.source_ids == resp.source_ids, "Failed to add VMs to Protection Jobs."
+        update_resp = self.cohesity_client.protection_jobs.\
+            update_protection_job(body=resp, id=resp.id)
+        assert update_resp.source_ids == resp.source_ids, \
+            "Failed to add VMs to Protection Jobs."
         print("VM(s) %s added to protection job successfully" % vm_list)
 
     def check_vms_exists(self, vm_list):
@@ -54,7 +57,8 @@ class AddVMProtectionJob(object):
         resp_vm_list = self.cohesity_client.protection_sources\
             .list_virtual_machines(names=str_vm_list)
 
-        assert len(vm_list) == len(resp_vm_list), "VMs not found in the vCenter."
+        assert len(vm_list) == len(resp_vm_list), "VMs not found " \
+                                                  "in the vCenter."
         return [vm.id for vm in resp_vm_list]
 
 
@@ -66,7 +70,8 @@ class AddVMProtectionJob(object):
             Boolean: Return True if exists, else return False.
             job_id(int): Protection job ID.
         """
-        pj_list = self.cohesity_client.protection_jobs.get_protection_jobs(only_return_basic_summary=True)
+        pj_list = self.cohesity_client.protection_jobs.\
+            get_protection_jobs(only_return_basic_summary=True)
         for job in pj_list:
             if job.name == protect_job_name:
                 return True, job
@@ -186,4 +191,3 @@ def main():
 if __name__ == '__main__':
 
     main()
-
