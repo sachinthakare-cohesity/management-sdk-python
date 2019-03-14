@@ -1,19 +1,26 @@
 # Copyright 2019 Cohesity Inc.
 #
+# This script is compatible with both Python2 and Python3
+#
 # Python example to
 #    0. Handle invalid authentication.
 #    1. handle expired tokens.
 #    2. Handle other APIException
 # Usage: python handling_error.py
 
+import os
 import json
 from functools import wraps
+import argparse
 
 from cohesity_management_sdk.cohesity_client import CohesityClient
-from cohesity_management_sdk.exceptions.api_exception import APIException, ExpiredTokenException
+from cohesity_management_sdk.exceptions.api_exception \
+    import APIException, ExpiredTokenException
 from cohesity_management_sdk.models.access_token import AccessToken
-from cohesity_management_sdk.samples.list_protection_jobs.list_protection_jobs import ProtectionJobsList
-from cohesity_management_sdk.samples.list_unresolved_alerts.list_unresolved_alerts import Alerts
+from cohesity_management_sdk.samples.list_protection_jobs.list_protection_jobs\
+    import ProtectionJobsList
+from cohesity_management_sdk.samples.list_unresolved_alerts.\
+    list_unresolved_alerts import Alerts
 
 CLUSTER_USERNAME = 'cluster_username'
 CLUSTER_PASSWORD = 'cluster_password'
@@ -34,14 +41,16 @@ def handle_invalid_auth(username, password):
     :param password(str): Password of Cohesity cluster user.
     :return None:
     """
-    print ("Init client with username: {0}, password: {1}".format(username, password))
+    print ("Init client with username: {0}, password: {1}".format(username,
+                                                                  password))
     cohesity_client = init_client(username, password)
 
     try:
         ProtectionJobsList().display_protection_jobs(cohesity_client)
         print ("\n\n *** List Protection Jobs successful ***\n\n")
     except APIException as ex:
-        if json.loads(ex.context.response.raw_body)['errorCode'] == 'KValidationError':
+        if json.loads(ex.context.response.raw_body)['errorCode'] ==\
+                'KValidationError':
             print ("\n\n *** Invalid Username/Password ***\n\n")
             handle_invalid_auth(CLUSTER_VIP, CLUSTER_USERNAME,
                                 CLUSTER_PASSWORD)
@@ -71,7 +80,8 @@ def reinit_token(ExpiredTokenExcept, tries=3):
                 try:
                     return f(*args, **kwargs)
                 except ExpiredTokenExcept:
-                    print ("Expired token , Re-initilize the cohesity client.\n\n")
+                    print ("Expired token ,"
+                           " Re-initilize the cohesity client.\n\n")
                     cohesity_client = args[0]
                     cohesity_client.auth.authorize()
                     num_tries -= 1
@@ -99,14 +109,17 @@ def handle_priv_error(cluster_username, cluster_password):
     """
     cohesity_client = init_client(cluster_username, cluster_password)
     try:
-        cohesity_client.protection_sources.get_download_physical_agent(host_type='kLinux')
+        cohesity_client.protection_sources.\
+            get_download_physical_agent(host_type='kLinux')
     except APIException as ex:
-        if json.loads(ex.context.response.raw_body)['errorCode'] == 'KPrivilegeError':
+        if json.loads(ex.context.response.raw_body)['errorCode'] \
+                == 'KPrivilegeError':
             print ("\n\n*** User Privileges not Sufficient.****\n\n")
+
 
 def main():
 
-    #Invalid username/password
+    # Invalid username/password
     handle_invalid_auth(CLUSTER_USERNAME, INVALID_PASSWORD)
 
     # Expired token.
@@ -120,6 +133,7 @@ def main():
     viewer_username = CLUSTER_VIEWER
     viewer_password = CLUSTER_VIEWER_PASSWORD
     handle_priv_error(viewer_username, viewer_password)
+
 
 if __name__ == '__main__':
     main()
