@@ -1,6 +1,6 @@
 # Copyright 2019 Cohesity Inc.
 #
-# This script is compatible with both Python2 and Python3
+# This script is compatible with Python2
 #
 # Python example to add a VM to a protection Job.
 # Note: This script assumes you have a vCenter as a protection source in your
