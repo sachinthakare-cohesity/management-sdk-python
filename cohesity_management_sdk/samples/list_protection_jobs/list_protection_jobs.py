@@ -2,7 +2,6 @@
 #
 # This script is compatible with Python2
 #
-# This script is compatible with both Python2 and Python3
 # Usage: python list_protection_jobs.py
 
 import argparse
