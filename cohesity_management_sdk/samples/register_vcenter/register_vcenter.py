@@ -1,7 +1,7 @@
 # Copyright 2019 Cohesity Inc.
 #
 # Python example to add a VM to a protection Job.
-# This script is compatible with both Python2 and Python3
+# This script is compatible with Python2
 # Usage: python register_vcenter.py
 
 import os
