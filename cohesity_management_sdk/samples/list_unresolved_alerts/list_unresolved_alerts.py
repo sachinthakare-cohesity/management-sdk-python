@@ -1,7 +1,7 @@
 # Copyright 2019 Cohesity Inc.
 #
 # Python example to list recent user_configurable unresolved alert unresolved Alerts.
-# This script is compatible with both Python2 and Python3
+# This script is compatible with Python2
 # Usage: python list_unresolved_alerts.py --max_alerts 10
 
 import os
