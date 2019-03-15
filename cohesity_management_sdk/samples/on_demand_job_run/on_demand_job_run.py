@@ -1,7 +1,7 @@
 # Copyright 2019 Cohesity Inc.
 #
 # Python example to start a protection job on demand by job name.
-# This script is compatible with both Python2 and Python3
+# This script is compatible with Python2
 # Usage: python on_demand_job_run.py --job_name <name_of_protection_job>
 
 import os
