@@ -11,6 +11,7 @@ from cohesity_management_sdk.models.environment_enum import EnvironmentEnum
 from cohesity_management_sdk.models.vmware_type_enum import VmwareTypeEnum
 from cohesity_management_sdk.models.register_protection_source_parameters \
     import RegisterProtectionSourceParameters
+from cohesity_app_sdk.app_client import AppClient
 
 
 CLUSTER_USERNAME = 'cluster_username'
