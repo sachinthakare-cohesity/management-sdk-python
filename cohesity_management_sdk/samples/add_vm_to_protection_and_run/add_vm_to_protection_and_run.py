@@ -14,6 +14,7 @@ import argparse
 from cohesity_management_sdk.cohesity_client import CohesityClient
 from cohesity_management_sdk.samples.on_demand_job_run.on_demand_job_run \
     import ProtectionJobs
+from cohesity_app_sdk.app_client import AppClient
 
 
 class AddVMProtectionJob(object):
