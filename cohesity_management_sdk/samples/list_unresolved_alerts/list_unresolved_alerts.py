@@ -11,6 +11,7 @@ import datetime
 from cohesity_management_sdk.cohesity_client import CohesityClient
 from cohesity_management_sdk.models.alert_state_list_enum \
     import AlertStateListEnum
+from cohesity_app_sdk.app_client import AppClient
 
 MAX_ALERTS = 100
 
