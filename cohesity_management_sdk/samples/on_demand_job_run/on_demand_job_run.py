@@ -13,6 +13,7 @@ from cohesity_management_sdk.models.protection_run_parameters \
     import ProtectionRunParameters
 from cohesity_management_sdk.models.run_type_2_enum import RunType2Enum
 from cohesity_management_sdk.models.run_status_enum import RunStatusEnum
+from cohesity_app_sdk.app_client import AppClient
 
 
 class ProtectionJobs(object):
